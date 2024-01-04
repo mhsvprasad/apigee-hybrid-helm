@@ -13,7 +13,7 @@ spec:
     namespace: apigee
   project: default
   source:
-    repoURL: https://gitlab.env.io/center-of-enablement/poc/apigee-hybrid-argo.git
+    repoURL: https://github.com/mhsvprasad/apigee-hybrid-helm.git
     path: preflight
     targetRevision: HEAD
   syncPolicy:
