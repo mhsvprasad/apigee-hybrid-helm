@@ -3,10 +3,10 @@ kind: Application
 metadata:
   name: apigee-preflight
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-  annotations:
-    argocd.argoproj.io/sync-wave: "-99"
+#  finalizers:
+#    - resources-finalizer.argocd.argoproj.io
+#  annotations:
+#    argocd.argoproj.io/sync-wave: "-99"
 spec:
   destination:
     server: https://kubernetes.default.svc
