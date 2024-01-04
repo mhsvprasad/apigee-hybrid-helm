@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/mhsvprasad/apigee-hybrid-helm.git
-    path: preflight
+    path: dev
     targetRevision: HEAD
   syncPolicy:
     automated:
