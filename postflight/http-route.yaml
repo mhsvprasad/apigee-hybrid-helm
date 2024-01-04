@@ -1,0 +1,14 @@
+apiVersion: apigee.cloud.google.com/v1alpha1
+kind: ApigeeRoute
+metadata:
+  name: apigee-http
+  namespace: apigee
+spec:
+  hostnames:
+  - "*"
+  ports:
+  - number: 8080
+    protocol: HTTP
+  selector:
+    app: apigee-ingressgateway
+  enableNonSniClient: true
