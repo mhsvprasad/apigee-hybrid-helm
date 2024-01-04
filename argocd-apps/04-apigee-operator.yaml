@@ -18,7 +18,7 @@ spec:
       targetRevision: 1.11.1
       helm:
         valueFiles:
-          - $values/apigee-values/overrides.yaml
+          - $values/apigee-overrides/overrides.yaml
     - repoURL: https://github.com/mhsvprasad/apigee-hybrid-helm.git
       targetRevision: HEAD
       ref: values
