@@ -1,0 +1,72 @@
+instanceID: "apigee_hybrid_poc"
+namespace: apigee
+
+gcp:
+  projectID: hybrid-poc-argo
+  region: us-central1
+
+k8sCluster:
+  name: poc-apigee-hybrid
+  region: us-central1
+org: sidgs-hybrid-argocd
+
+nodeSelector:
+  requiredForScheduling: true
+  apigeeRuntime:
+    key: "apigee.com/apigee-nodepool"
+    value: "apigee-runtime"
+  apigeeData:
+    key: "apigee.com/apigee-nodepool"
+    value: "apigee-data"
+
+envs:
+  - name: env-test-1
+    serviceAccountSecretRefs:
+      synchronizer: "hybrid-poc-argo-apigee"
+      runtime: "wealth-hybrid-poc-argo-apigee"
+      udca: "wealth-hybrid-poc-argo-apigee-non-prod-csa"
+#  - name: env-test-2
+#    serviceAccountSecretRefs:
+#      synchronizer: "wealth-hybrid-poc-argo-apigee-non-prod-csa"
+#      runtime: "wealth-hybrid-poc-argo-apigee-non-prod-csa"
+#      udca: "wealth-hybrid-poc-argo-apigee-non-prod-csa"
+
+cassandra:
+  hostNetwork: false
+  replicaCount: 1
+
+ingressGateways:
+  - name: poc-1
+    replicaCountMin: 2
+    replicaCountMax: 10
+    svcType: ClusterIP
+
+virtualhosts:
+  - name: poc-argo-test-1
+    selector:
+      app: apigee-ingressgateway
+      ingress_name: poc-1
+    additionalGateways: ["apigee-http"]
+    sslSecret: dummyCert
+
+mart:
+  serviceAccountRef: "hybrid-poc-argo-apigee"
+
+connectAgent:
+  serviceAccountRef: "hybrid-poc-argo-apigee"
+
+logger:
+  enabled: true
+  serviceAccountRef: "hybrid-poc-argo-apigee"
+
+metrics:
+  serviceAccountRef: "hybrid-poc-argo-apigee"
+
+udca:
+  serviceAccountRef: "hybrid-poc-argo-apigee"
+
+watcher:
+  serviceAccountRef: "hybrid-poc-argo-apigee"
+
+ao:
+  hostNetwork: true

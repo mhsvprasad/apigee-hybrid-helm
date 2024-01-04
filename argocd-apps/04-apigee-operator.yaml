@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apigee-operator
+  namespace: argocd
+#  finalizers:
+#    - resources-finalizer.argocd.argoproj.io
+#  annotations:
+#    argocd.argoproj.io/sync-wave: "-80"
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: apigee-system
+  project: default
+  sources:
+    - repoURL: us-docker.pkg.dev/apigee-release/apigee-hybrid-helm-charts
+      chart: apigee-operator
+      targetRevision: 1.11.1
+      helm:
+        valueFiles:
+          - $values/apigee-values/overrides.yaml
+    - repoURL: https://github.com/mhsvprasad/apigee-hybrid-helm.git
+      targetRevision: HEAD
+      ref: values
+#  ignoreDifferences:
+#    - group: cert-manager.io
+#      kind: Certificate
+#      jqPathExpressions:
+#        - .spec.duration
+#        - .spec.renewBefore
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PruneLast=true
+
