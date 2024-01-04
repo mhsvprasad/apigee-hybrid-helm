@@ -11,7 +11,7 @@ spec:
     namespace: argocd
   project: default
   source:
-    repoURL: https://gitlab.env.io/center-of-enablement/poc/apigee-hybrid-argo.git
+    repoURL: https://gitlab.io/center-of-enablement/poc/apigee-hybrid-argo.git
     path: applications
     targetRevision: HEAD
   syncPolicy:
